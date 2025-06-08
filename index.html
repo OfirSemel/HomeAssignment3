@@ -3,13 +3,161 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title></title>
+    <title>Amsterdam Rentals - Find Your Perfect Slay</title>
     <link rel="icon" href="images/icon.ico" type="image/x-icon" />
     <script src="js/data/amsterdam.js" defer></script>
     <link rel="stylesheet" href="css/home.css" />
+    <link rel="stylesheet" href="css/main.css" />
+     <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     <script>
       console.log(amsterdam);
     </script>
   </head>
-  <body></body>
+  <body>
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg" id="main-nav">
+        <div class="container">
+            <a class="navbar-brand" href="index.html">
+                <i class="fas fa-home me-2"></i>Amsterdam Rentals
+            </a>
+            
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav me-auto">
+                    <li class="nav-item">
+                        <a class="nav-link active" href="index.html">
+                            <i class="fas fa-home me-1"></i>Home
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="mybookings.html">
+                            <i class="fas fa-calendar-check me-1"></i>My Bookings
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="favorites.html">
+                            <i class="fas fa-heart me-1"></i>Favorites
+                        </a>
+                    </li>
+                </ul>
+                
+                <div class="d-flex align-items-center">
+                    <span class="user-info me-3">
+                        <i class="fas fa-user me-1"></i>
+                        <span id="current-user-name">Welcome</span>
+                    </span>
+                    <button class="btn btn-sign-out" onclick="signOut()">
+                        <i class="fas fa-sign-out-alt me-1"></i>Sign Out
+                    </button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero-section">
+        <div class="container">
+            <h1 class="hero-title">Discover Amsterdam</h1>
+            <p class="hero-subtitle">Find your perfect apartment in the heart of the Netherlands</p>
+            
+            <div class="stats-container">
+                <div class="stat-item">
+                    <span class="stat-number" id="total-apartments">0</span>
+                    <span>Available Apartments</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-number">24/7</span>
+                    <span>Customer Support</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-number">5★</span>
+                    <span>Top Rated</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Filter Section -->
+    <div class="container">
+        <div class="filter-section">
+            <h3 class="filter-title">
+                <i class="fas fa-filter me-2"></i>Find Your Perfect Stay
+            </h3>
+            <form id="filter-form">
+                <div class="row">
+                    <div class="col-md-3 mb-3">
+                        <label for="min-rating" class="form-label">Minimum Rating</label>
+                        <select class="form-select" id="min-rating">
+                            <option value="">Any Rating</option>
+                            <option value="4.5">4.5+ Stars</option>
+                            <option value="4.0">4.0+ Stars</option>
+                            <option value="3.5">3.5+ Stars</option>
+                            <option value="3.0">3.0+ Stars</option>
+                        </select>
+                    </div>
+                    <div class="col-md-3 mb-3">
+                        <label for="min-price" class="form-label">Min Price (€)</label>
+                        <input type="number" class="form-control" id="min-price" placeholder="0" min="0">
+                    </div>
+                    <div class="col-md-3 mb-3">
+                        <label for="max-price" class="form-label">Max Price (€)</label>
+                        <input type="number" class="form-control" id="max-price" placeholder="1000" min="0">
+                    </div>
+                    <div class="col-md-3 mb-3">
+                        <label for="bedrooms" class="form-label">Bedrooms</label>
+                        <select class="form-select" id="bedrooms">
+                            <option value="">Any</option>
+                        </select>
+                    </div>
+                </div>
+                <button type="submit" class="btn btn-filter">
+                    <i class="fas fa-search me-2"></i>Filter Apartments
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Listings Grid -->
+    <div class="listings-container">
+        <div id="listings-grid" class="listings-grid">
+            <div class="loading">
+                <div class="spinner"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+    
+    <!-- Custom JS Files -->
+    <script src="data/amsterdam.js"></script>
+    <script src="JS/storage.js"></script>
+    <script src="JS/utils.js"></script>
+    <script src="JS/auth.js"></script>
+    <script src="JS/listing.js"></script>
+    
+    <script>
+        // Initialize page when loaded
+        document.addEventListener('DOMContentLoaded', function() {
+            // Check authentication
+            checkAuth();
+            
+            // Load and display listings
+            loadListings();
+            
+            // Setup filter form
+            setupFilterForm();
+            
+            // Load bedroom options dynamically
+            loadBedroomOptions();
+            
+            // Update total apartments count
+            updateApartmentCount();
+        });
+    </script>
+</body>
 </html>
