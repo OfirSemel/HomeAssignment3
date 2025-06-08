@@ -3,161 +3,586 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Amsterdam Rentals - Find Your Perfect Slay</title>
+    <title>HOT Amsterdam - Find Your Perfect Slay</title>
     <link rel="icon" href="images/icon.ico" type="image/x-icon" />
     <script src="js/data/amsterdam.js" defer></script>
     <link rel="stylesheet" href="css/home.css" />
     <link rel="stylesheet" href="css/main.css" />
      <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+
     <script>
       console.log(amsterdam);
     </script>
   </head>
-  <body>
-    <!-- Navigation -->
-    <nav class="navbar navbar-expand-lg" id="main-nav">
+ <body>
+    <nav class="navbar navbar-expand-lg navbar-custom">
         <div class="container">
-            <a class="navbar-brand" href="index.html">
-                <i class="fas fa-home me-2"></i>Amsterdam Rentals
+            <a class="navbar-brand brand-logo" href="index.html">
+                <i class="fas fa-home brand-icon"></i>
+                <span class="brand-text">Amsterdam Rentals</span>
             </a>
             
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
-                <span class="navbar-toggler-icon"></span>
+            <button class="navbar-toggler custom-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="toggler-icon"></span>
+                <span class="toggler-icon"></span>
+                <span class="toggler-icon"></span>
             </button>
             
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav me-auto">
                     <li class="nav-item">
-                        <a class="nav-link active" href="index.html">
-                            <i class="fas fa-home me-1"></i>Home
+                        <a class="nav-link nav-link-custom active" href="index.html">
+                            <i class="fas fa-home me-2"></i>Home
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="mybookings.html">
-                            <i class="fas fa-calendar-check me-1"></i>My Bookings
+                        <a class="nav-link nav-link-custom" href="mybookings.html">
+                            <i class="fas fa-calendar-check me-2"></i>My Bookings
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="favorites.html">
-                            <i class="fas fa-heart me-1"></i>Favorites
+                        <a class="nav-link nav-link-custom" href="favorites.html">
+                            <i class="fas fa-heart me-2"></i>Favorites
                         </a>
                     </li>
                 </ul>
                 
-                <div class="d-flex align-items-center">
-                    <span class="user-info me-3">
-                        <i class="fas fa-user me-1"></i>
-                        <span id="current-user-name">Welcome</span>
-                    </span>
+                <div class="d-flex align-items-center user-section">
+                    <div class="user-info">
+                        <i class="fas fa-user-circle user-avatar"></i>
+                        <span class="user-name" id="current-user-name">Welcome Guest</span>
+                    </div>
                     <button class="btn btn-sign-out" onclick="signOut()">
-                        <i class="fas fa-sign-out-alt me-1"></i>Sign Out
+                        <i class="fas fa-sign-out-alt me-2"></i>Sign Out
                     </button>
                 </div>
             </div>
         </div>
     </nav>
 
-    <!-- Hero Section -->
-    <section class="hero-section">
-        <div class="container">
-            <h1 class="hero-title">Discover Amsterdam</h1>
-            <p class="hero-subtitle">Find your perfect apartment in the heart of the Netherlands</p>
-            
-            <div class="stats-container">
-                <div class="stat-item">
-                    <span class="stat-number" id="total-apartments">0</span>
-                    <span>Available Apartments</span>
+=    <section class="hero-section">
+        <div class="hero-background">
+            <div class="floating-shape shape-1"></div>
+            <div class="floating-shape shape-2"></div>
+            <div class="floating-shape shape-3"></div>
+            <div class="floating-shape shape-4"></div>
+        </div>
+        
+        <div class="container hero-content">
+            <div class="row align-items-center">
+                <div class="col-lg-6">
+                    <div class="hero-text">
+                        <h1 class="hero-title">
+                            Discover <span class="highlight">Amsterdam</span>
+                            <div class="title-decoration"></div>
+                        </h1>
+                        <p class="hero-subtitle">Experience Amsterdam like a local. Handpicked apartments in the city's most HOT neighborhoods.</p>
+                        
+                        <div class="hero-stats">
+                            <div class="stat-item">
+                                <div class="stat-number" id="total-apartments">0</div>
+                                <div class="stat-label">Available Apartments</div>
+                            </div>
+                            <div class="stat-item">
+                                <div class="stat-number">24/7</div>
+                                <div class="stat-label">Customer Support</div>
+                            </div>
+                            <div class="stat-item">
+                                <div class="stat-number">4.9★</div>
+                                <div class="stat-label">Average Rating</div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-                <div class="stat-item">
-                    <span class="stat-number">24/7</span>
-                    <span>Customer Support</span>
-                </div>
-                <div class="stat-item">
-                    <span class="stat-number">5★</span>
-                    <span>Top Rated</span>
+                <div class="col-lg-6">
+                    <div class="hero-image">
+                        <div class="image-container">
+                            <img src="./images/AmsterdamPic1.jpeg" alt="Amsterdam Canal Houses" class="main-image">
+                            <div class="image-overlay"></div>
+                            <div class="image-badge">
+                                <i class="fas fa-heart"></i>
+                                <span>Top Rated</span>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Filter Section -->
-    <div class="container">
-        <div class="filter-section">
-            <h3 class="filter-title">
-                <i class="fas fa-filter me-2"></i>Find Your Perfect Stay
-            </h3>
-            <form id="filter-form">
-                <div class="row">
-                    <div class="col-md-3 mb-3">
-                        <label for="min-rating" class="form-label">Minimum Rating</label>
-                        <select class="form-select" id="min-rating">
-                            <option value="">Any Rating</option>
-                            <option value="4.5">4.5+ Stars</option>
-                            <option value="4.0">4.0+ Stars</option>
-                            <option value="3.5">3.5+ Stars</option>
-                            <option value="3.0">3.0+ Stars</option>
-                        </select>
-                    </div>
-                    <div class="col-md-3 mb-3">
-                        <label for="min-price" class="form-label">Min Price (€)</label>
-                        <input type="number" class="form-control" id="min-price" placeholder="0" min="0">
-                    </div>
-                    <div class="col-md-3 mb-3">
-                        <label for="max-price" class="form-label">Max Price (€)</label>
-                        <input type="number" class="form-control" id="max-price" placeholder="1000" min="0">
-                    </div>
-                    <div class="col-md-3 mb-3">
-                        <label for="bedrooms" class="form-label">Bedrooms</label>
-                        <select class="form-select" id="bedrooms">
-                            <option value="">Any</option>
-                        </select>
-                    </div>
+    <section class="filter-section">
+        <div class="container">
+            <div class="filter-card">
+                <div class="filter-header">
+                    <h3 class="filter-title">
+                        <i class="fas fa-search me-2"></i>
+                        Find Your Perfect Stay
+                    </h3>
+                    <p class="filter-subtitle">Use our advanced filters to discover your ideal Amsterdam apartment</p>
                 </div>
-                <button type="submit" class="btn btn-filter">
-                    <i class="fas fa-search me-2"></i>Filter Apartments
-                </button>
-            </form>
-        </div>
-    </div>
 
-    <!-- Listings Grid -->
-    <div class="listings-container">
-        <div id="listings-grid" class="listings-grid">
-            <div class="loading">
-                <div class="spinner"></div>
+                <form id="filter-form" class="filter-form">
+                    <div class="row g-4">
+                        <div class="col-lg-3 col-md-6">
+                            <div class="filter-group">
+                                <label for="min-rating" class="filter-label">
+                                    <i class="fas fa-star me-2"></i>Minimum Rating
+                                </label>
+                                <select class="form-select filter-select" id="min-rating">
+                                    <option value="">Any Rating</option>
+                                    <option value="4.5">4.5+ Stars ⭐⭐⭐⭐⭐</option>
+                                    <option value="4.0">4.0+ Stars ⭐⭐⭐⭐</option>
+                                    <option value="3.5">3.5+ Stars ⭐⭐⭐</option>
+                                    <option value="3.0">3.0+ Stars ⭐⭐</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="col-lg-3 col-md-6">
+                            <div class="filter-group">
+                                <label for="min-price" class="filter-label">
+                                    <i class="fas fa-dollar-sign me-2"></i>Min Price
+                                </label>
+                                <div class="price-input-wrapper">
+                                    <input type="number" class="form-control filter-input" id="min-price" placeholder="0" min="0">
+                                    <span class="price-currency">$/night</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-lg-3 col-md-6">
+                            <div class="filter-group">
+                                <label for="max-price" class="filter-label">
+                                    <i class="fas fa-dollar-sign me-2"></i>Max Price
+                                </label>
+                                <div class="price-input-wrapper">
+                                    <input type="number" class="form-control filter-input" id="max-price" placeholder="1000" min="0">
+                                    <span class="price-currency">$/night</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-lg-3 col-md-6">
+                            <div class="filter-group">
+                                <label for="bedrooms" class="filter-label">
+                                    <i class="fas fa-bed me-2"></i>Bedrooms
+                                </label>
+                                <select class="form-select filter-select" id="bedrooms">
+                                    <option value="">Any</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="filter-actions">
+                        <button type="submit" class="btn btn-filter">
+                            <i class="fas fa-search me-2"></i>
+                            <span class="btn-text">Filter Apartments</span>
+                            <div class="btn-effect"></div>
+                        </button>
+                        <button type="button" class="btn btn-clear" onclick="clearFilters()">
+                            <i class="fas fa-times me-2"></i>Clear Filters
+                        </button>
+                    </div>
+                </form>
+
+                <div id="filter-results" class="filter-results" style="display: none;">
+                    <i class="fas fa-info-circle me-2"></i>
+                    <span id="results-text">Showing all apartments</span>
+                    <button class="btn btn-link btn-sm ms-2" onclick="clearFilters()" id="clear-results-btn" style="display: none;">
+                        Clear Filters
+                    </button>
+                </div>
             </div>
         </div>
-    </div>
+    </section>
 
-    <!-- Bootstrap JS -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
-    
-    <!-- Custom JS Files -->
-    <script src="data/amsterdam.js"></script>
-    <script src="JS/storage.js"></script>
-    <script src="JS/utils.js"></script>
-    <script src="JS/auth.js"></script>
-    <script src="JS/listing.js"></script>
+    <section class="apartments-section">
+        <div class="container">
+            <div class="section-header text-center mb-5">
+                <h2 class="section-title">Available Apartments</h2>
+                <p class="section-subtitle">Discover amazing places to stay in Amsterdam</p>
+                <div class="title-underline"></div>
+            </div>
+
+            <div id="loading-state" class="loading-container">
+                <div class="loading-spinner">
+                    <div class="spinner"></div>
+                </div>
+                <p class="loading-text">Loading amazing apartments...</p>
+            </div>
+
+            <div id="apartments-grid" class="apartments-grid" style="display: none;">
+            </div>
+
+            <div id="no-results" class="no-results" style="display: none;">
+                <div class="no-results-icon">
+                    <i class="fas fa-search"></i>
+                </div>
+                <h3 class="no-results-title">No Apartments Found</h3>
+                <p class="no-results-text">Try adjusting your filters to see more results</p>
+                <button class="btn btn-primary" onclick="clearFilters()">
+                    <i class="fas fa-refresh me-2"></i>Reset Filters
+                </button>
+            </div>
+        </div>
+    </section>
+
     
     <script>
-        // Initialize page when loaded
+        window.amsterdam = [
+            {
+                listing_id: "2818",
+                listing_url: "https://www.airbnb.com/rooms/2818",
+                name: "Quiet Garden View Room & Super Fast WiFi",
+                description: "Quiet Garden View Room & Super Fast WiFi. The room is located to the east of the city centre in a quiet, typical Amsterdam neighbourhood the \"Indische Buurt\". Amsterdam's historic centre is less than 15 minutes away by bike or tram.",
+                picture_url: "https://a0.muscache.com/pictures/10272854/8dcca016_original.jpg",
+                price: "$59.00",
+                bedrooms: "1",
+                review_scores_rating: "4.88",
+                neighbourhood_cleansed: "Oostelijk Havengebied - Indische Buurt"
+            },
+            // {
+            //     listing_id: "20168",
+            //     listing_url: "https://www.airbnb.com/rooms/20168",
+            //     name: "Studio with private bathroom in the centre 1",
+            //     description: "17th century Dutch townhouse in the heart of the city. Located a stones throw from Rembrandt Square, Dam Square, Leidse Square and Flower Market. Walking distance from Central Station.",
+            //     picture_url: "https://a0.muscache.com/pictures/69979628/fd6a3a80_original.jpg",
+            //     price: "$106.00",
+            //     bedrooms: "1",
+            //     review_scores_rating: "4.44",
+            //     neighbourhood_cleansed: "Centrum-Oost"
+            // },
+            {
+                listing_id: "25428",
+                listing_url: "https://www.airbnb.com/rooms/25428",
+                name: "Lovely, sunny 1 bed apt in Ctr (w.lift) & firepl.",
+                description: "Lovely apt in Centre (lift & fireplace) near Jordaan. This nicely furnished, newly renovated apt is very sunny, and spacious with 8 windows. The appliances are fairly new.",
+                picture_url: "https://a0.muscache.com/pictures/138431/7079a93d_original.jpg",
+                price: "$100.00",
+                bedrooms: "1",
+                review_scores_rating: "5",
+                neighbourhood_cleansed: "Centrum-West"
+            },
+            {
+                listing_id: "27886",
+                listing_url: "https://www.airbnb.com/rooms/27886",
+                name: "Romantic, stylish B&B houseboat in canal district",
+                description: "Stylish and romantic houseboat on fantastic historic location with breathtaking view. Wheelhouse, deckhouse and captains room. Central, quiet.",
+                picture_url: "https://a0.muscache.com/pictures/02c2da9d-660e-451d-8a51-2f7a17469df7.jpg",
+                price: "$135.00",
+                bedrooms: "1",
+                review_scores_rating: "4.95",
+                neighbourhood_cleansed: "Centrum-West"
+            },
+            {
+                listing_id: "41125",
+                listing_url: "https://www.airbnb.com/rooms/41125",
+                name: "Amsterdam Center Entire Apartment",
+                description: "A nice, sunny and spacious apartment in the center of Amsterdam, in the Jordaan neighborhood: one of the most characteristics neighborhood of Amsterdam.",
+                picture_url: "https://a0.muscache.com/pictures/c632c4e8-48fd-4e14-a258-8aa0c7382fa1.jpg",
+                price: "$160.00",
+                bedrooms: "1",
+                review_scores_rating: "4.8",
+                neighbourhood_cleansed: "Centrum-West"
+            },
+            {
+                listing_id: "44391",
+                listing_url: "https://www.airbnb.com/rooms/44391",
+                name: "Quiet 2-bedroom Amsterdam city centre apartment",
+                description: "Fully furnished apartment in the center of Amsterdam including a livingroom, 2 bedrooms, toilet, shower, luxurious kitchen and beautiful roof terrace!",
+                picture_url: "https://a0.muscache.com/pictures/97741545/39000c13_original.jpg",
+                price: "$197.00",
+                bedrooms: "2",
+                review_scores_rating: "4.71",
+                neighbourhood_cleansed: "Centrum-Oost"
+            },
+            {
+                listing_id: "49552",
+                listing_url: "https://www.airbnb.com/rooms/49552",
+                name: "Multatuli Luxury Guest Suite in top location",
+                description: "Stylish & spacious guest suite in Amsterdam's most desirable neighbourhood. Central and convenient. Perfectly placed in easy walking distance of all the sights.",
+                picture_url: "https://a0.muscache.com/pictures/a6d6d2ee-3196-4e3b-b0ec-d26b71d598ec.jpg",
+                price: "$157.00",
+                bedrooms: "2",
+                review_scores_rating: "4.9",
+                neighbourhood_cleansed: "Centrum-West"
+            },
+            {
+                listing_id: "49790",
+                listing_url: "https://www.airbnb.com/rooms/49790",
+                name: "Luxurous Houseboat-Great Location",
+                description: "One of the best houseboats in Central Amsterdam, luxurous, fantastic terrace on the water and great view on a very good location, near the center.",
+                picture_url: "https://a0.muscache.com/pictures/1146105/2c19e898_original.jpg",
+                price: "$250.00",
+                bedrooms: "2",
+                review_scores_rating: "4.93",
+                neighbourhood_cleansed: "De Baarsjes - Oud-West"
+            }
+        ];
+    </script>
+
+    <script>
+        let allApartments = window.amsterdam || [];
+        let filteredApartments = [...allApartments];
+        let userFavorites = [];
+
         document.addEventListener('DOMContentLoaded', function() {
-            // Check authentication
-            checkAuth();
+            initializePage();
+        });
+
+        function initializePage() {
+            checkUserAuth();
             
-            // Load and display listings
-            loadListings();
+            loadApartments();
             
-            // Setup filter form
             setupFilterForm();
             
-            // Load bedroom options dynamically
             loadBedroomOptions();
             
-            // Update total apartments count
             updateApartmentCount();
-        });
+        }
+
+        function checkUserAuth() {
+            const currentUser = localStorage.getItem('currentUser') || 'Demo User';
+            document.getElementById('current-user-name').textContent = currentUser;
+            
+            const favoritesKey = `${currentUser}_favorites`;
+            userFavorites = JSON.parse(localStorage.getItem(favoritesKey) || '[]');
+        }
+
+        function loadApartments() {
+            document.getElementById('loading-state').style.display = 'block';
+            document.getElementById('apartments-grid').style.display = 'none';
+            
+            setTimeout(() => {
+                displayApartments(filteredApartments);
+                document.getElementById('loading-state').style.display = 'none';
+                document.getElementById('apartments-grid').style.display = 'block';
+            }, 1000);
+        }
+
+        function displayApartments(apartments) {
+            const grid = document.getElementById('apartments-grid');
+            
+            if (apartments.length === 0) {
+                document.getElementById('apartments-grid').style.display = 'none';
+                document.getElementById('no-results').style.display = 'block';
+                return;
+            }
+            
+            document.getElementById('no-results').style.display = 'none';
+            document.getElementById('apartments-grid').style.display = 'grid';
+            
+            grid.innerHTML = apartments.map(apartment => createApartmentCard(apartment)).join('');
+        }
+
+        function createApartmentCard(apartment) {
+    const isFavorite = userFavorites.includes(apartment.listing_id);
+    const stars = generateStars(parseFloat(apartment.review_scores_rating) || 0);
+    const price = parseFloat(apartment.price.replace('$', '').replace(',', '')) || 0;
+    
+            
+            return `
+                <div class="apartment-card" data-listing-id="${apartment.listing_id}">
+                    <div class="card-image-container">
+                        <img src="${apartment.picture_url}" alt="${apartment.name}" class="card-image" onerror="this.src='https://via.placeholder.com/400x250?text=No+Image'">
+                        <div class="card-overlay">
+                            <button class="btn-favorite ${isFavorite ? 'active' : ''}" onclick="toggleFavorite('${apartment.listing_id}')" title="${isFavorite ? 'Remove from favorites' : 'Add to favorites'}">
+                                <i class="fas fa-heart"></i>
+                            </button>
+                        </div>
+                        <div class="price-badge">
+                            <span class="price">${apartment.price}</span>
+                            <span class="period">/night</span>
+                        </div>
+                    </div>
+                    
+                    <div class="card-content">
+                        <div class="card-header">
+                            <h4 class="apartment-name">${apartment.name}</h4>
+                            <div class="apartment-rating">
+                                <span class="rating-stars">${stars}</span>
+                                <span class="rating-value">${apartment.review_scores_rating || 'N/A'}</span>
+                            </div>
+                        </div>
+                        
+                        <div class="apartment-details">
+                            <div class="detail-item">
+                                <i class="fas fa-map-marker-alt"></i>
+                                <span>${apartment.neighbourhood_cleansed}</span>
+                            </div>
+                            <div class="detail-item">
+                                <i class="fas fa-bed"></i>
+                                <span>${apartment.bedrooms} ${apartment.bedrooms == '1' ? 'Bedroom' : 'Bedrooms'}</span>
+                            </div>
+                            <div class="detail-item">
+                                <i class="fas fa-hashtag"></i>
+                                <span>ID: ${apartment.listing_id}</span>
+                            </div>
+                        </div>
+                        
+                        <p class="apartment-description">${apartment.description}</p>
+                        
+                        <div class="card-actions">
+                            <a href="${apartment.listing_url}" target="_blank" class="btn btn-outline">
+                                <i class="fas fa-external-link-alt me-2"></i>View Details
+                            </a>
+                            <button class="btn btn-rent" onclick="rentApartment('${apartment.listing_id}')">
+                                <i class="fas fa-calendar-check me-2"></i>Rent Now
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            `;
+        }
+
+        function generateStars(rating) {
+            const fullStars = Math.floor(rating);
+            const hasHalfStar = rating % 1 >= 0.5;
+            let stars = '';
+            
+            for (let i = 0; i < fullStars; i++) {
+                stars += '<i class="fas fa-star"></i>';
+            }
+            
+            if (hasHalfStar) {
+                stars += '<i class="fas fa-star-half-alt"></i>';
+            }
+            
+            const remainingStars = 5 - Math.ceil(rating);
+            for (let i = 0; i < remainingStars; i++) {
+                stars += '<i class="far fa-star"></i>';
+            }
+            
+            return stars;
+        }
+
+        function setupFilterForm() {
+            document.getElementById('filter-form').addEventListener('submit', function(e) {
+                e.preventDefault();
+                applyFilters();
+            });
+        }
+
+        function applyFilters() {
+            const minRating = parseFloat(document.getElementById('min-rating').value) || 0;
+            const minPrice = parseFloat(document.getElementById('min-price').value) || 0;
+            const maxPrice = parseFloat(document.getElementById('max-price').value) || Infinity;
+            const bedrooms = document.getElementById('bedrooms').value;
+
+            filteredApartments = allApartments.filter(apartment => {
+                const rating = parseFloat(apartment.review_scores_rating) || 0;
+                const price = parseFloat(apartment.price.replace('$', '').replace(',', '')) || 0;
+                
+                if (rating < minRating) return false;
+                if (price < minPrice || price > maxPrice) return false;
+                if (bedrooms && apartment.bedrooms !== bedrooms) return false;
+                return true;
+            });
+
+            displayApartments(filteredApartments);
+            showFilterResults();
+        }
+
+        function clearFilters() {
+            document.getElementById('filter-form').reset();
+            filteredApartments = [...allApartments];
+            displayApartments(filteredApartments);
+            hideFilterResults();
+        }
+
+        function showFilterResults() {
+            const resultsDiv = document.getElementById('filter-results');
+            const resultsText = document.getElementById('results-text');
+            const clearBtn = document.getElementById('clear-results-btn');
+            
+            resultsText.textContent = `Showing ${filteredApartments.length} of ${allApartments.length} apartments`;
+            clearBtn.style.display = filteredApartments.length !== allApartments.length ? 'inline-block' : 'none';
+            resultsDiv.style.display = 'block';
+        }
+
+        function hideFilterResults() {
+            document.getElementById('filter-results').style.display = 'none';
+        }
+
+        function loadBedroomOptions() {
+            const bedroomsSelect = document.getElementById('bedrooms');
+            const uniqueBedrooms = [...new Set(allApartments.map(apt => apt.bedrooms))].sort((a, b) => parseInt(a) - parseInt(b));
+            
+            uniqueBedrooms.forEach(bedrooms => {
+                const option = document.createElement('option');
+                option.value = bedrooms;
+                option.textContent = bedrooms === '1' ? '1 Bedroom' : `${bedrooms} Bedrooms`;
+                bedroomsSelect.appendChild(option);
+            });
+        }
+
+        function updateApartmentCount() {
+            document.getElementById('total-apartments').textContent = allApartments.length;
+        }
+
+        function toggleFavorite(listingId) {
+            const currentUser = localStorage.getItem('currentUser') || 'Demo User';
+            const favoritesKey = `${currentUser}_favorites`;
+            
+            if (userFavorites.includes(listingId)) {
+                userFavorites = userFavorites.filter(id => id !== listingId);
+                showToast('Removed from favorites', 'info');
+            } else {
+                userFavorites.push(listingId);
+                showToast('Added to favorites', 'success');
+            }
+            
+            localStorage.setItem(favoritesKey, JSON.stringify(userFavorites));
+            
+            const btn = document.querySelector(`[data-listing-id="${listingId}"] .btn-favorite`);
+            if (btn) {
+                btn.classList.toggle('active');
+                btn.title = userFavorites.includes(listingId) ? 'Remove from favorites' : 'Add to favorites';
+            }
+        }
+
+        function rentApartment(listingId) {
+            const apartment = allApartments.find(apt => apt.listing_id === listingId);
+            if (apartment) {
+                localStorage.setItem('selectedApartment', JSON.stringify(apartment));
+                alert(`Selected apartment: ${apartment.name}\nRedirecting to rent page...`);
+            }
+        }
+
+        function signOut() {
+            if (confirm('Are you sure you want to sign out?')) {
+                localStorage.clear();
+                window.location.reload();
+            }
+        }
+
+        function showToast(message, type = 'info') {
+            const toast = document.createElement('div');
+            toast.className = `toast-notification toast-${type}`;
+            toast.innerHTML = `
+                <i class="fas fa-${type === 'success' ? 'check-circle' : 'info-circle'} me-2"></i>
+                ${message}
+            `;
+            
+            document.body.appendChild(toast);
+            
+            setTimeout(() => {
+                toast.classList.add('show');
+            }, 100);
+            
+            setTimeout(() => {
+                toast.classList.remove('show');
+                setTimeout(() => {
+                    if (toast.parentNode) {
+                        toast.remove();
+                    }
+                }, 300);
+            }, 3000);
+        }
     </script>
 </body>
 </html>
