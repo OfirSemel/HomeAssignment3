@@ -386,7 +386,9 @@ function formatCVV(e) {
 function handleBooking(e) {
     e.preventDefault();
     
-    if (!validateBookingForm()) {
+    // בדיקה רק של תאריכים - לא של פרטי תשלום
+    if (!selectedDates.checkin || !selectedDates.checkout) {
+        showToast('Please select check-in and check-out dates', 'warning');
         return;
     }
     
@@ -412,13 +414,13 @@ function handleBooking(e) {
             endDate: selectedDates.checkout   
         };
         
+        console.log('💾 Saving booking:', booking); // לבדיקה
         saveBooking(booking);
         
         const bookingRef = Math.random().toString(36).substring(2, 8).toUpperCase();
         document.getElementById('booking-ref').textContent = bookingRef;
         
         showSuccessModal();
-        
         showToast('Booking completed successfully!', 'success');
         
         btnContent.style.opacity = '1';
@@ -428,56 +430,56 @@ function handleBooking(e) {
     }, 2000);
 }
 
-function validateBookingForm() {
-    const requiredFields = [
-        'cardholder-name',
-        'card-number',
-        'expiry-date',
-        'cvv',
-        'billing-address'
-    ];
+// function validateBookingForm() {
+//     const requiredFields = [
+//         'cardholder-name',
+//         'card-number',
+//         'expiry-date',
+//         'cvv',
+//         'billing-address'
+//     ];
     
-    for (const fieldId of requiredFields) {
-        const field = document.getElementById(fieldId);
-        if (!field.value.trim()) {
-            field.focus();
-            showToast('Please fill in all required fields', 'warning');
-            return false;
-        }
-    }
+//     for (const fieldId of requiredFields) {
+//         const field = document.getElementById(fieldId);
+//         if (!field.value.trim()) {
+//             field.focus();
+//             showToast('Please fill in all required fields', 'warning');
+//             return false;
+//         }
+//     }
     
-    const cardNumber = document.getElementById('card-number').value.replace(/\s/g, '');
-    if (cardNumber.length < 13 || cardNumber.length > 19) {
-        document.getElementById('card-number').focus();
-        showToast('Invalid card number', 'warning');
-        return false;
-    }
+//     const cardNumber = document.getElementById('card-number').value.replace(/\s/g, '');
+//     if (cardNumber.length < 13 || cardNumber.length > 19) {
+//         document.getElementById('card-number').focus();
+//         showToast('Invalid card number', 'warning');
+//         return false;
+//     }
     
-    const expiryDate = document.getElementById('expiry-date').value;
-    if (!/^\d{2}\/\d{2}$/.test(expiryDate)) {
-        document.getElementById('expiry-date').focus();
-        showToast('Invalid expiry date', 'warning');
-        return false;
-    }
+//     const expiryDate = document.getElementById('expiry-date').value;
+//     if (!/^\d{2}\/\d{2}$/.test(expiryDate)) {
+//         document.getElementById('expiry-date').focus();
+//         showToast('Invalid expiry date', 'warning');
+//         return false;
+//     }
     
-    const [month, year] = expiryDate.split('/');
-    const expiry = new Date(2000 + parseInt(year), parseInt(month) - 1);
-    const now = new Date();
-    if (expiry <= now) {
-        document.getElementById('expiry-date').focus();
-        showToast('Card has expired', 'warning');
-        return false;
-    }
+//     const [month, year] = expiryDate.split('/');
+//     const expiry = new Date(2000 + parseInt(year), parseInt(month) - 1);
+//     const now = new Date();
+//     if (expiry <= now) {
+//         document.getElementById('expiry-date').focus();
+//         showToast('Card has expired', 'warning');
+//         return false;
+//     }
     
-    const cvv = document.getElementById('cvv').value;
-    if (cvv.length < 3 || cvv.length > 4) {
-        document.getElementById('cvv').focus();
-        showToast('Invalid CVV', 'warning');
-        return false;
-    }
+//     const cvv = document.getElementById('cvv').value;
+//     if (cvv.length < 3 || cvv.length > 4) {
+//         document.getElementById('cvv').focus();
+//         showToast('Invalid CVV', 'warning');
+//         return false;
+//     }
     
-    return true;
-}
+//     return true;
+// }
 
 function saveBooking(booking) {
     const bookingKey = `${currentUser}_bookings`;
