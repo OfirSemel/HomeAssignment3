@@ -5,15 +5,432 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>HOT Amsterdam - Find Your Perfect Slay</title>
     <link rel="icon" href="images/icon.ico" type="image/x-icon" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
     <script src="js/data/amsterdam.js"></script>
+    <link rel="stylesheet" href="css/rent.css" />
     <script>
       console.log(amsterdam);
     </script>
   </head>
-  <body>
+   <body>
+    <nav class="navbar-custom">
+        <div class="container">
+            <div class="d-flex justify-content-between align-items-center w-100">
+                <a href="index.html" class="brand-logo">
+                    <i class="fas fa-home brand-icon"></i>
+                    <span class="brand-text">HOT Amsterdam Rent</span>
+                </a>
+                
+                <button class="custom-toggler d-lg-none" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                    <span class="toggler-icon"></span>
+                    <span class="toggler-icon"></span>
+                    <span class="toggler-icon"></span>
+                </button>
 
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav ms-auto align-items-center">
+                        <li class="nav-item">
+                            <a href="index.html" class="nav-link-custom">
+                                <i class="fas fa-home me-2"></i>Home
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="#" class="nav-link-custom">
+                                <i class="fas fa-heart me-2"></i>Favorites
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="#" class="nav-link-custom">
+                                <i class="fas fa-user me-2"></i>Profile
+                            </a>
+                        </li>
+                    </ul>
+                    
+                    <div class="user-section d-flex align-items-center">
+                        <div class="user-info">
+                            <i class="fas fa-user-circle user-avatar"></i>
+                            <span class="user-name" id="current-username">User</span>
+                        </div>
+                        <button class="btn-sign-out" onclick="signOut()">
+                            <i class="fas fa-sign-out-alt me-2"></i>Sign Out
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <div class="hero-booking">
+        <div class="container">
+            <div class="hero-content">
+                <div class="breadcrumb-custom">
+                    <a href="index.html" class="breadcrumb-link">
+                        <i class="fas fa-home me-2"></i>Home
+                    </a>
+                    <i class="fas fa-chevron-right mx-3"></i>
+                    <span class="breadcrumb-current">Property Booking</span>
+                </div>
+                <h1 class="hero-title">Complete Your Booking</h1>
+                <p class="hero-subtitle">Secure your perfect Amsterdam SLAY</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="container content-wrapper">
+        <div class="property-overview-card mb-5">
+            <div class="property-single-column">
+                <div class="property-image-section">
+                    <div class="property-image-wrapper">
+                        <img id="property-image" src="" alt="Property" class="property-overview-image">
+                        <div class="property-badges">
+                            <div class="verified-badge">
+                                <i class="fas fa-shield-check me-2"></i>Verified
+                            </div>
+                            <div class="rating-badge">
+                                <i class="fas fa-star me-1"></i>
+                                <span id="overview-rating">4.8</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="property-content-section">
+                    <div class="property-overview-content">
+                        <div class="property-header">
+                            <h2 id="property-name" class="property-overview-title">Loading...</h2>
+                            <div class="property-location">
+                                <i class="fas fa-map-marker-alt me-2"></i>
+                                <span id="property-location">Amsterdam, Netherlands</span>
+                            </div>
+                        </div>
+                        
+                        <div class="property-highlights">
+                            <div class="highlight-item">
+                                <div class="highlight-icon">
+                                    <i class="fas fa-bed"></i>
+                                </div>
+                                <div class="highlight-content">
+                                    <span class="highlight-number" id="property-beds">2</span>
+                                    <span class="highlight-label">Bedrooms</span>
+                                </div>
+                            </div>
+                            <div class="highlight-item">
+                                <div class="highlight-icon">
+                                    <i class="fas fa-bath"></i>
+                                </div>
+                                <div class="highlight-content">
+                                    <span class="highlight-number" id="property-baths">1</span>
+                                    <span class="highlight-label">Bathrooms</span>
+                                </div>
+                            </div>
+                            <div class="highlight-item">
+                                <div class="highlight-icon">
+                                    <i class="fas fa-expand-arrows-alt"></i>
+                                </div>
+                                <div class="highlight-content">
+                                    <span class="highlight-number" id="property-area">85</span>
+                                    <span class="highlight-label">m²</span>
+                                </div>
+                            </div>
+                            <div class="highlight-item">
+                                <div class="highlight-icon">
+                                    <i class="fas fa-users"></i>
+                                </div>
+                                <div class="highlight-content">
+                                    <span class="highlight-number" id="property-guests">4</span>
+                                    <span class="highlight-label">Max Guests</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="property-description-overview">
+                            <p id="property-desc">Loading description...</p>
+                        </div>
+
+                        <div class="price-overview">
+                            <div class="price-main">
+                                <span class="price-currency">€</span>
+                                <span class="price-amount" id="property-price">0</span>
+                                <span class="price-period">per night</span>
+                            </div>
+                            <div class="price-note">Taxes and fees included</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="booking-section">
+            <div class="row g-4">
+                <div class="col-lg-8">
+                    <div class="booking-card date-card mb-4">
+                        <div class="card-header-custom">
+                            <div class="card-icon">
+                                <i class="fas fa-calendar-alt"></i>
+                            </div>
+                            <div class="card-title-wrapper">
+                                <h3 class="card-title">Select Your Dates</h3>
+                                <p class="card-subtitle">Choose your check-in and check-out dates</p>
+                            </div>
+                        </div>
+                        
+                        <div class="date-selection-grid">
+                            <div class="date-input-group">
+                                <label class="date-label">Check-in</label>
+                                <div class="date-input-wrapper">
+                                    <i class="fas fa-calendar date-input-icon"></i>
+                                    <input type="date" id="checkin-date" class="date-input" required>
+                                </div>
+                            </div>
+                            <div class="date-separator">
+                                <i class="fas fa-long-arrow-alt-right"></i>
+                            </div>
+                            <div class="date-input-group">
+                                <label class="date-label">Check-out</label>
+                                <div class="date-input-wrapper">
+                                    <i class="fas fa-calendar date-input-icon"></i>
+                                    <input type="date" id="checkout-date" class="date-input" required>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="availability-section">
+                            <button type="button" id="check-availability" class="btn-check-availability">
+                                <i class="fas fa-search me-2"></i>Check Availability
+                                <div class="btn-loading" style="display: none;">
+                                    <div class="spinner"></div>
+                                </div>
+                            </button>
+                            <div id="availability-result" class="availability-result" style="display: none;"></div>
+                        </div>
+                    </div>
+
+                    <div class="booking-card guest-card mb-4">
+                        <div class="card-header-custom">
+                            <div class="card-icon">
+                                <i class="fas fa-users"></i>
+                            </div>
+                            <div class="card-title-wrapper">
+                                <h3 class="card-title">Guest Information</h3>
+                                <p class="card-subtitle">How many guests will be staying?</p>
+                            </div>
+                        </div>
+                        
+                        <div class="guest-selector">
+                            <select id="guest-count" class="guest-select">
+                                <option value="1">1 Guest</option>
+                                <option value="2">2 Guests</option>
+                                <option value="3">3 Guests</option>
+                                <option value="4">4 Guests</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="booking-card payment-card">
+                        <div class="card-header-custom">
+                            <div class="card-icon">
+                                <i class="fas fa-credit-card"></i>
+                            </div>
+                            <div class="card-title-wrapper">
+                                <h3 class="card-title">Payment Information</h3>
+                                <p class="card-subtitle">Enter your payment details to complete booking</p>
+                            </div>
+                        </div>
+                        
+                        <form id="payment-form" class="payment-form">
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label class="form-label-custom">
+                                        <i class="fas fa-user me-2"></i>Cardholder Name
+                                    </label>
+                                    <input type="text" id="cardholder-name" class="form-input-custom" placeholder="John Doe" required>
+                                </div>
+                            </div>
+
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label class="form-label-custom">
+                                        <i class="fas fa-credit-card me-2"></i>Card Number
+                                    </label>
+                                    <input type="text" id="card-number" class="form-input-custom" placeholder="1234 5678 9012 3456" maxlength="19" required>
+                                    <div class="card-logos">
+                                        <i class="fab fa-cc-visa"></i>
+                                        <i class="fab fa-cc-mastercard"></i>
+                                        <i class="fab fa-cc-amex"></i>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="form-row-split">
+                                <div class="form-group">
+                                    <label class="form-label-custom">
+                                        <i class="fas fa-calendar me-2"></i>Expiry Date
+                                    </label>
+                                    <input type="text" id="expiry-date" class="form-input-custom" placeholder="MM/YY" maxlength="5" required>
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label-custom">
+                                        <i class="fas fa-lock me-2"></i>CVV
+                                    </label>
+                                    <input type="text" id="cvv" class="form-input-custom" placeholder="123" maxlength="3" required>
+                                </div>
+                            </div>
+
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label class="form-label-custom">
+                                        <i class="fas fa-map-marker-alt me-2"></i>Billing Address
+                                    </label>
+                                    <input type="text" id="billing-address" class="form-input-custom" placeholder="Street, Number, City" required>
+                                </div>
+                            </div>
+
+                            <div class="security-badges">
+                                <div class="security-item">
+                                    <i class="fas fa-shield-alt"></i>
+                                    <span>SSL Encrypted</span>
+                                </div>
+                                <div class="security-item">
+                                    <i class="fas fa-lock"></i>
+                                    <span>Secure Payment</span>
+                                </div>
+                                <div class="security-item">
+                                    <i class="fas fa-check-circle"></i>
+                                    <span>PCI Compliant</span>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+
+                <div class="col-lg-4">
+                    <div class="booking-summary-card sticky-card">
+                        <div class="summary-header">
+                            <h3 class="summary-title">Booking Summary</h3>
+                            <div class="summary-property">
+                                <img id="summary-image" src="" alt="Property" class="summary-property-image">
+                                <div class="summary-property-info">
+                                    <h4 id="summary-name" class="summary-property-name">Property Name</h4>
+                                    <div class="summary-property-rating">
+                                        <span class="rating-stars" id="summary-stars">★★★★★</span>
+                                        <span class="rating-value" id="summary-rating">4.8</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="summary-dates" id="summary-dates" style="display: none;">
+                            <div class="date-row">
+                                <span class="date-label">Check-in</span>
+                                <span class="date-value" id="summary-checkin">-</span>
+                            </div>
+                            <div class="date-row">
+                                <span class="date-label">Check-out</span>
+                                <span class="date-value" id="summary-checkout">-</span>
+                            </div>
+                            <div class="date-row">
+                                <span class="date-label">Duration</span>
+                                <span class="date-value" id="summary-nights">- nights</span>
+                            </div>
+                        </div>
+
+                        <div id="price-breakdown" class="price-breakdown" style="display: none;">
+                            <div class="breakdown-section">
+                                <div class="breakdown-row">
+                                    <span class="breakdown-label">
+                                        <span id="nightly-rate">€0</span> × <span id="nights-count">0</span> nights
+                                    </span>
+                                    <span class="breakdown-value" id="subtotal-price">€0</span>
+                                </div>
+                                <div class="breakdown-row">
+                                    <span class="breakdown-label">Cleaning fee</span>
+                                    <span class="breakdown-value">€50</span>
+                                </div>
+                                <div class="breakdown-row">
+                                    <span class="breakdown-label">Service fee</span>
+                                    <span class="breakdown-value" id="service-fee">€0</span>
+                                </div>
+                                <div class="breakdown-row">
+                                    <span class="breakdown-label">Taxes</span>
+                                    <span class="breakdown-value" id="tax-fee">€0</span>
+                                </div>
+                            </div>
+                            
+                            <div class="breakdown-total">
+                                <div class="total-row">
+                                    <span class="total-label">Total</span>
+                                    <span class="total-value" id="total-price">€0</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <button type="submit" form="payment-form" id="complete-booking" class="btn-complete-booking" disabled>
+                            <div class="btn-content">
+                                <i class="fas fa-calendar-check me-2"></i>
+                                <span>Complete Booking</span>
+                            </div>
+                            <div class="btn-price" id="booking-total">€0</div>
+                            <div class="btn-loading" style="display: none;">
+                                <div class="spinner"></div>
+                            </div>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="successModal" tabindex="-1">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content success-modal">
+                <div class="modal-body">
+                    <div class="success-animation">
+                        <div class="success-icon">
+                            <i class="fas fa-check"></i>
+                        </div>
+                        <div class="success-confetti">
+                            <div class="confetti"></div>
+                            <div class="confetti"></div>
+                            <div class="confetti"></div>
+                            <div class="confetti"></div>
+                            <div class="confetti"></div>
+                        </div>
+                    </div>
+                    <div class="success-content">
+                        <h3 class="success-title">Booking Confirmed!</h3>
+                        <p class="success-message">Thank you for choosing Amsterdam Rent. Your booking confirmation has been sent to your email.</p>
+                        <div class="success-details">
+                            <div class="detail-item">
+                                <i class="fas fa-envelope me-2"></i>
+                                <span>Confirmation email sent</span>
+                            </div>
+                            <div class="detail-item">
+                                <i class="fas fa-calendar me-2"></i>
+                                <span>Booking reference: #AR<span id="booking-ref">123456</span></span>
+                            </div>
+                        </div>
+                        <div class="success-actions">
+                            <button type="button" class="btn-primary-custom" onclick="window.location.href='index.html'">
+                                <i class="fas fa-home me-2"></i>Back to Home
+                            </button>
+                            <button type="button" class="btn-secondary-custom" onclick="window.print()">
+                                <i class="fas fa-print me-2"></i>Print Confirmation
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="toast-container" class="toast-container"></div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+    
 <script src="js/auth.js"></script>
 <script src="js/storage.js"></script>
+<script src="js/rent.js"></script>
+
 
 <script>
     (function() {
@@ -24,7 +441,10 @@
             return;
         }
         
-        document.getElementById('current-user-name').textContent = currentUser;
+        const usernameElement = document.getElementById('current-username');
+        if (usernameElement) {
+            usernameElement.textContent = currentUser;
+        }
     })();
 
     function signOut() {

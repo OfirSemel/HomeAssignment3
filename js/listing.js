@@ -139,63 +139,102 @@ class ApartmentListing {
         grid.innerHTML = apartments.map(apartment => this.createApartmentCard(apartment)).join('');
     }
 
-    createApartmentCard(apartment) {
+   createApartmentCard(apartment) {
+        console.log('Creating card for:', apartment.name);
+        console.log('Description length:', (apartment.description || '').length);
         const isFavorite = this.userFavorites.includes(apartment.listing_id);
         const stars = this.generateStars(parseFloat(apartment.review_scores_rating) || 0);
-        
-        return `
-            <div class="apartment-card" data-listing-id="${apartment.listing_id}">
-                <div class="card-image-container">
-                    <img src="${apartment.picture_url}" alt="${apartment.name}" class="card-image" onerror="this.src='https://via.placeholder.com/400x250?text=No+Image'">
-                    <div class="card-overlay">
-                        <button class="btn-favorite ${isFavorite ? 'active' : ''}" onclick="apartmentListing.toggleFavorite('${apartment.listing_id}')" title="${isFavorite ? 'Remove from favorites' : 'Add to favorites'}">
-                            <i class="fas fa-heart"></i>
-                        </button>
-                    </div>
-                    <div class="price-badge">
-                        <span class="price">${apartment.price}</span>
-                        <span class="period">/night</span>
+
+       const description = apartment.description || '';
+       const cleanText = description.replace(/<[^>]*>/g, ' ').replace(/\s+/g, ' ').trim();
+       let descriptionHTML = cleanText;
+console.log('Description length:', cleanText.length); 
+
+       if (cleanText.length > 150) {
+const shortText = cleanText.substring(0, 120); 
+           descriptionHTML = `
+                 <span class="description-short">${shortText}...</span>
+    <span class="description-full" style="display: none;">${cleanText}</span>
+    <button class="btn-read-more" onclick="apartmentListing.toggleDescription(this)" style="background: none; border: none; color: #FF6B35; font-weight: 600; cursor: pointer; margin-top: 10px; display: block;">
+        <i class="fas fa-chevron-down me-2"></i>Keep Reading
+    </button>
+            `;
+    }
+    
+    return `
+        <div class="apartment-card" data-listing-id="${apartment.listing_id}">
+            <div class="card-image-container">
+                <img src="${apartment.picture_url}" alt="${apartment.name}" class="card-image" onerror="this.src='https://via.placeholder.com/400x250?text=No+Image'">
+                <div class="card-overlay">
+                    <button class="btn-favorite ${isFavorite ? 'active' : ''}" onclick="apartmentListing.toggleFavorite('${apartment.listing_id}')" title="${isFavorite ? 'Remove from favorites' : 'Add to favorites'}">
+                        <i class="fas fa-heart"></i>
+                    </button>
+                </div>
+                <div class="price-badge">
+                    <span class="price">${apartment.price}</span>
+                    <span class="period">/night</span>
+                </div>
+            </div>
+            
+            <div class="card-content">
+                <div class="card-header">
+                    <h4 class="apartment-name">${apartment.name}</h4>
+                    <div class="apartment-rating">
+                        <span class="rating-stars">${stars}</span>
+                        <span class="rating-value">${apartment.review_scores_rating || 'N/A'}</span>
                     </div>
                 </div>
                 
-                <div class="card-content">
-                    <div class="card-header">
-                        <h4 class="apartment-name">${apartment.name}</h4>
-                        <div class="apartment-rating">
-                            <span class="rating-stars">${stars}</span>
-                            <span class="rating-value">${apartment.review_scores_rating || 'N/A'}</span>
-                        </div>
+                <div class="apartment-details">
+                    <div class="detail-item">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <span>${apartment.neighbourhood_cleansed}</span>
                     </div>
-                    
-                    <div class="apartment-details">
-                        <div class="detail-item">
-                            <i class="fas fa-map-marker-alt"></i>
-                            <span>${apartment.neighbourhood_cleansed}</span>
-                        </div>
-                        <div class="detail-item">
-                            <i class="fas fa-bed"></i>
-                            <span>${apartment.bedrooms} ${apartment.bedrooms == '1' ? 'Bedroom' : 'Bedrooms'}</span>
-                        </div>
-                        <div class="detail-item">
-                            <i class="fas fa-hashtag"></i>
-                            <span>ID: ${apartment.listing_id}</span>
-                        </div>
+                    <div class="detail-item">
+                        <i class="fas fa-bed"></i>
+                        <span>${apartment.bedrooms} ${apartment.bedrooms == '1' ? 'Bedroom' : 'Bedrooms'}</span>
                     </div>
-                    
-                    <p class="apartment-description">${apartment.description}</p>
-                    
-                    <div class="card-actions">
-                        <a href="${apartment.listing_url}" target="_blank" class="btn btn-outline">
-                            <i class="fas fa-external-link-alt me-2"></i>View Details
-                        </a>
-                        <button class="btn btn-rent" onclick="apartmentListing.rentApartment('${apartment.listing_id}')">
-                            <i class="fas fa-calendar-check me-2"></i>Rent Now
-                        </button>
+                    <div class="detail-item">
+                        <i class="fas fa-hashtag"></i>
+                        <span>ID: ${apartment.listing_id}</span>
                     </div>
                 </div>
+                
+                <p class="apartment-description">${descriptionHTML}</p>
+                
+                <div class="card-actions">
+                    <a href="${apartment.listing_url}" target="_blank" class="btn btn-outline">
+                        <i class="fas fa-external-link-alt me-2"></i>View Details
+                    </a>
+                    <button class="btn btn-rent" onclick="apartmentListing.rentApartment('${apartment.listing_id}')">
+                        <i class="fas fa-calendar-check me-2"></i>Rent Now
+                    </button>
+                </div>
             </div>
-        `;
+        </div>
+    `;
+}
+
+toggleDescription(button) {
+    const container = button.parentElement;
+    const apartmentCard = container.closest('.apartment-card');
+    const shortText = container.querySelector('.description-short');
+    const fullText = container.querySelector('.description-full');
+    
+    if (fullText.style.display === 'none') {
+        // הרחב
+        shortText.style.display = 'none';
+        fullText.style.display = 'inline';
+        button.innerHTML = '<i class="fas fa-chevron-up me-2"></i>Show Less';
+        apartmentCard.classList.add('expanded');
+    } else {
+        // כווץ
+        shortText.style.display = 'inline';
+        fullText.style.display = 'none';
+        button.innerHTML = '<i class="fas fa-chevron-down me-2"></i>Keep Reading';
+        apartmentCard.classList.remove('expanded');
     }
+}
 
     generateStars(rating) {
         const fullStars = Math.floor(rating);
@@ -266,14 +305,18 @@ class ApartmentListing {
         }
     }
 
-    rentApartment(listingId) {
-        const apartment = this.allApartments.find(apt => apt.listing_id === listingId);
-        if (apartment) {
-            localStorage.setItem('selectedApartment', JSON.stringify(apartment));
-            this.showToast(`Selected apartment: ${apartment.name}`, 'success');
-            
-        }
+   rentApartment(listingId) {
+    const apartment = this.allApartments.find(apt => apt.listing_id === listingId);
+    if (apartment) {
+        localStorage.setItem('selectedApartment', JSON.stringify(apartment));
+        
+        this.showToast(`בחירת דירה: ${apartment.name}`, 'success');
+        
+        setTimeout(() => {
+            window.location.href = `rent.html?id=${listingId}`;
+        }, 1000);
     }
+}
 
     showToast(message, type = 'info') {
         const toast = document.createElement('div');
