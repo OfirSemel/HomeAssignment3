@@ -32,7 +32,7 @@ function handleLogin(event) {
     
     if (user) {
         setCurrentUser(username);
-        alert('🎉 LOGIN SUCCESS! \n\nWelcome ' + username + '!');
+        alert('LOGIN SUCCESS! \n\nWelcome ' + username + '!');
         window.location.replace('index.html');
     } else {
         showError('Invalid username or password. User not registered.');

@@ -1,4 +1,3 @@
-
 :root {
     --amsterdam-orange: #FF6B35;
     --amsterdam-blue: #004D9F;
@@ -10,7 +9,6 @@
     --amsterdam-red: #E74C3C;
     --amsterdam-gold: #F1C40F;
 }
-
 
 * {
     margin: 0;
@@ -46,6 +44,7 @@ body::before {
     50% { transform: rotate(180deg) scale(1.1); }
 }
 
+/* Navigation - Identical to original */
 .navbar-custom {
     background: linear-gradient(135deg, var(--amsterdam-blue) 0%, var(--amsterdam-orange) 100%);
     padding: 15px 0;
@@ -54,6 +53,15 @@ body::before {
     position: sticky;
     top: 0;
     z-index: 1000;
+}
+
+.nav-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 }
 
 .brand-logo {
@@ -92,32 +100,6 @@ body::before {
     background-clip: text;
 }
 
-.custom-toggler {
-    border: none;
-    padding: 4px 8px;
-    background: rgba(255, 255, 255, 0.1);
-    border-radius: 8px;
-    transition: all 0.3s ease;
-}
-
-.custom-toggler:focus {
-    box-shadow: none;
-}
-
-.toggler-icon {
-    display: block;
-    width: 25px;
-    height: 3px;
-    background: white;
-    margin: 5px 0;
-    transition: all 0.3s ease;
-    border-radius: 2px;
-}
-
-.custom-toggler:hover .toggler-icon {
-    background: var(--amsterdam-orange);
-}
-
 .nav-link-custom {
     color: white !important;
     font-weight: 500;
@@ -127,6 +109,7 @@ body::before {
     transition: all 0.3s ease;
     position: relative;
     overflow: hidden;
+    text-decoration: none;
 }
 
 .nav-link-custom::before {
@@ -144,6 +127,7 @@ body::before {
     color: white !important;
     transform: translateY(-2px);
     box-shadow: 0 4px 15px rgba(255, 255, 255, 0.2);
+    text-decoration: none;
 }
 
 .nav-link-custom:hover::before {
@@ -201,9 +185,8 @@ body::before {
 }
 
 .btn-sign-out:hover {
+     background-color: #dc2626;
     transform: translateY(-2px);
-    box-shadow: 0 6px 20px rgba(231, 76, 60, 0.4);
-    background: linear-gradient(45deg, #c0392b, var(--amsterdam-red));
 }
 
 .btn-sign-out:hover::before {
@@ -1452,33 +1435,3 @@ body::before {
 .description-short {
     display: inline;
 }
-
-/* .btn-read-more {
-    background: none !important;
-    border: none !important;
-    color: var(--amsterdam-orange) !important;
-    font-weight: 600 !important;
-    font-size: 14px !important;
-    cursor: pointer !important;
-    margin-top: 10px !important;
-    display: block !important;
-    transition: all 0.3s ease !important;
-    padding: 8px 0 !important;
-} */
-
-/* .btn-read-more:hover {
-    color: var(--amsterdam-blue) !important;
-    transform: translateX(5px) !important;
-}
-
-.btn-read-more i {
-    transition: transform 0.3s ease;
-}
-
-.btn-read-more:hover i {
-    transform: scale(1.1);
-}
-
-.apartment-description {
-    line-height: 1.7;
-} */

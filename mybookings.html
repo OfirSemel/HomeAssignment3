@@ -8,30 +8,158 @@
     <link rel="stylesheet" href="css/mybookings.css" />
      <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+
   </head>
   <body>
+    <nav class="navbar-custom">
+        <div class="nav-container">
+            <a href="index.html" class="brand-logo">
+                <i class="fas fa-home brand-icon"></i>
+                <span class="brand-text">HOT Amsterdam Rental</span>
+            </a>
+            
+            <div class="navbar-nav d-flex flex-row align-items-center">
+                <a href="index.html" class="nav-link-custom">Home</a>
+                <a href="mybookings.html" class="nav-link-custom active">My Bookings</a>
+                <a href="favorites.html" class="nav-link-custom">Favorites</a>
+            </div>
+            
+            <div class="user-section d-flex align-items-center">
+                <div class="user-info">
+                    <i class="fas fa-user user-avatar"></i>
+                    <span class="user-name" id="nav-username">User</span>
+                </div>
+                <button class="btn-sign-out" onclick="signOut()">
+                    <i class="fas fa-sign-out-alt"></i>
+                    Sign Out
+                </button>
+            </div>
+        </div>
+    </nav>
 
-<script src="js/auth.js"></script>
-<script src="js/storage.js"></script>
+    <div class="container-fluid">
+        <div class="hero-section">
+            <div class="container">
+                <h1 class="hero-title">My Bookings</h1>
+                <p class="hero-subtitle">Manage your past and upcoming reservations</p>
+                <div class="stats-container">
+                    <div class="stat-item">
+                        <span class="stat-number" id="total-bookings">0</span>
+                        <span>Total Bookings</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-number" id="upcoming-bookings">0</span>
+                        <span>Upcoming</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-number" id="past-bookings">0</span>
+                        <span>Past</span>
+                    </div>
+                </div>
+            </div>
+        </div>
 
-<script>
-    (function() {
-        const currentUser = localStorage.getItem('currentUser');
-        if (!currentUser) {
-            alert('Please log in to access this page');
-            window.location.href = 'login.html';
-            return;
+        <div class="bookings-container">
+            <div class="container">
+                <div class="filter-tabs">
+                    <button class="tab-btn active" onclick="filterBookings('all')" data-tab="all">
+                        <i class="fas fa-calendar-alt"></i>
+                        All Bookings
+                    </button>
+                    <button class="tab-btn" onclick="filterBookings('upcoming')" data-tab="upcoming">
+                        <i class="fas fa-calendar-plus"></i>
+                        Upcoming
+                    </button>
+                    <button class="tab-btn" onclick="filterBookings('past')" data-tab="past">
+                        <i class="fas fa-calendar-check"></i>
+                        Past
+                    </button>
+                </div>
+
+                <div id="bookings-grid" class="bookings-grid">
+                </div>
+
+                <div id="no-bookings" class="no-bookings" style="display: none;">
+                    <i class="fas fa-calendar-times"></i>
+                    <h3>No Bookings Found</h3>
+                    <p>You haven't made any bookings yet. Start exploring our amazing apartments!</p>
+                    <a href="index.html" class="btn-explore">
+                        <i class="fas fa-search"></i>
+                        Explore Apartments
+                    </a>
+                </div>
+
+                <div id="loading" class="loading" style="display: none;">
+                    <div class="spinner"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="cancelBookingModal" tabindex="-1">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">
+                        <i class="fas fa-exclamation-triangle"></i>
+                        Cancel Booking
+                    </h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <p>Are you sure you want to cancel this booking?</p>
+                    <div class="booking-details">
+                        <h6 id="cancel-apartment-name"></h6>
+                        <p id="cancel-booking-dates"></p>
+                    </div>
+                    <div class="alert alert-warning">
+                        <i class="fas fa-info-circle"></i>
+                        This action cannot be undone.
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Keep Booking</button>
+                    <button type="button" class="btn btn-danger" id="confirm-cancel" onclick="confirmCancelBooking()">
+                        <i class="fas fa-trash"></i>
+                        Cancel Booking
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="toast-notification" class="toast-notification">
+        <i class="fas fa-check-circle"></i>
+        <span id="toast-message">Booking cancelled successfully!</span>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+    <script src="js/data/amsterdam.js"></script>
+    <script src="js/bookings.js"></script>
+    
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            checkAuthentication();
+            loadUserBookings();
+        });
+
+        function checkAuthentication() {
+            const currentUser = localStorage.getItem('currentUser');
+            if (!currentUser) {
+                alert('Please log in to access this page');
+                window.location.href = 'login.html';
+                return;
+            }
+            
+            document.getElementById('nav-username').textContent = currentUser;
         }
-        
-        document.getElementById('current-user-name').textContent = currentUser;
-    })();
 
-    function signOut() {
-        if (confirm('Are you sure you want to sign out?')) {
-            localStorage.removeItem('currentUser');
-            window.location.href = 'login.html';
+        function signOut() {
+            if (confirm('Are you sure you want to sign out?')) {
+                localStorage.removeItem('currentUser');
+                window.location.href = 'login.html';
+            }
         }
-    }
-</script>
+    </script>
   </body>
 </html>

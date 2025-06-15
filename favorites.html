@@ -10,11 +10,84 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
   </head>
   <body>
-
+ <nav class="navbar-custom">
+        <div class="container-fluid">
+            <div class="nav-container">
+                <a href="index.html" class="brand-logo">
+                    <i class="fas fa-home brand-icon"></i>
+                    <span class="brand-text">HOT Amsterdam Rental</span>
+                </a>
+                
+                <div class="navbar-nav d-flex flex-row align-items-center">
+                    <a href="index.html" class="nav-link-custom">Home</a>
+                    <a href="mybookings.html" class="nav-link-custom">My Bookings</a>
+                    <a href="favorites.html" class="nav-link-custom active">Favorites</a>
+                </div>
+                
+                <div class="user-section d-flex align-items-center">
+                    <div class="user-info">
+                        <i class="fas fa-user user-avatar"></i>
+                        <span class="user-name" id="nav-username">User</span>
+                    </div>
+                    <button class="btn-sign-out" onclick="signOut()">
+                        <i class="fas fa-sign-out-alt"></i>
+                        Sign Out
+                    </button>
+                </div>
+            </div>
+        </div>
+    </nav>
 <script src="js/auth.js"></script>
 <script src="js/storage.js"></script>
 
-<script>
+ <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            checkAuthentication();
+            loadUserBookings();
+        });
+
+        function checkAuthentication() {
+            const currentUser = localStorage.getItem('currentUser');
+            if (!currentUser) {
+                window.location.href = 'login.html';
+                return;
+            }
+            
+            document.getElementById('nav-username').textContent = currentUser;
+        }
+
+        function signOut() {
+            localStorage.removeItem('currentUser');
+            window.location.href = 'login.html';
+        }
+
+        let currentFilter = 'all';
+        function filterBookings(type) {
+            currentFilter = type;
+            
+            document.querySelectorAll('.tab-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            document.querySelector(`[data-tab="${type}"]`).classList.add('active');
+            
+            displayBookings(type);
+        }
+
+        function showToast(message, type = 'success') {
+            const toast = document.getElementById('toast-notification');
+            const messageEl = document.getElementById('toast-message');
+            
+            messageEl.textContent = message;
+            toast.className = `toast-notification toast-${type}`;
+            toast.classList.add('show');
+            
+            setTimeout(() => {
+                toast.classList.remove('show');
+            }, 3000);
+        }
+    </script>
+
+    <script>
     (function() {
         const currentUser = localStorage.getItem('currentUser');
         if (!currentUser) {
@@ -23,7 +96,10 @@
             return;
         }
         
-        document.getElementById('current-user-name').textContent = currentUser;
+        const usernameElement = document.getElementById('current-username');
+        if (usernameElement) {
+            usernameElement.textContent = currentUser;
+        }
     })();
 
     function signOut() {

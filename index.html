@@ -18,45 +18,28 @@
     </script> -->
   </head>
   <body>
-    <nav class="navbar navbar-expand-lg navbar-custom">
-        <div class="container">
-            <a class="navbar-brand brand-logo" href="index.html">
-                <i class="fas fa-home brand-icon"></i>
-                <span class="brand-text">HOT Amsterdam Rentals</span>
-            </a>
-            
-            <button class="navbar-toggler custom-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
-                <span class="toggler-icon"></span>
-                <span class="toggler-icon"></span>
-                <span class="toggler-icon"></span>
-            </button>
-            
-            <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav me-auto">
-                    <li class="nav-item">
-                        <a class="nav-link nav-link-custom active" href="index.html">
-                            <i class="fas fa-home me-2"></i>Home
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link nav-link-custom" href="mybookings.html">
-                            <i class="fas fa-calendar-check me-2"></i>My Bookings
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link nav-link-custom" href="favorites.html">
-                            <i class="fas fa-heart me-2"></i>Favorites
-                        </a>
-                    </li>
-                </ul>
+    <nav class="navbar-custom">
+        <div class="container-fluid">
+            <div class="nav-container">
+                <a href="index.html" class="brand-logo">
+                    <i class="fas fa-home brand-icon"></i>
+                    <span class="brand-text">HOT Amsterdam Rental</span>
+                </a>
                 
-                <div class="d-flex align-items-center user-section">
+                <div class="navbar-nav d-flex flex-row align-items-center">
+                    <a href="index.html" class="nav-link-custom active">Home</a>
+                    <a href="mybookings.html" class="nav-link-custom">My Bookings</a>
+                    <a href="favorites.html" class="nav-link-custom">Favorites</a>
+                </div>
+                
+                <div class="user-section d-flex align-items-center">
                     <div class="user-info">
-                        <i class="fas fa-user-circle user-avatar"></i>
-                        <span class="user-name" id="current-user-name">Welcome Guest</span>
+                        <i class="fas fa-user user-avatar"></i>
+                        <span class="user-name" id="nav-username">User</span>
                     </div>
-                    <button class="btn btn-sign-out" onclick="signOut()">
-                        <i class="fas fa-sign-out-alt me-2"></i>Sign Out
+                    <button class="btn-sign-out" onclick="signOut()">
+                        <i class="fas fa-sign-out-alt"></i>
+                        Sign Out
                     </button>
                 </div>
             </div>
@@ -238,39 +221,74 @@
     <script src="js/auth.js"></script>
     <script src="js/storage.js"></script>
 
-    <script>
-        (function() {
+   <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            checkAuthentication();
+            loadUserBookings();
+        });
+
+        function checkAuthentication() {
             const currentUser = localStorage.getItem('currentUser');
             if (!currentUser) {
-                alert('Please log in to access this page');
                 window.location.href = 'login.html';
                 return;
             }
             
-            document.getElementById('current-user-name').textContent = currentUser;
-        })();
-
-        function signOut() {
-            if (confirm('Are you sure you want to sign out?')) {
-                localStorage.removeItem('currentUser');
-                window.location.href = 'login.html';
-            }
+            document.getElementById('nav-username').textContent = currentUser;
         }
 
-        document.addEventListener('DOMContentLoaded', function() {
-            const loadingState = document.getElementById('loading-state');
-            const apartmentsGrid = document.getElementById('apartments-grid');
+        function signOut() {
+            localStorage.removeItem('currentUser');
+            window.location.href = 'login.html';
+        }
+
+        let currentFilter = 'all';
+        function filterBookings(type) {
+            currentFilter = type;
             
-            if (loadingState && apartmentsGrid) {
-                loadingState.style.display = 'block';
-                apartmentsGrid.style.display = 'none';
-                
-                setTimeout(() => {
-                    loadingState.style.display = 'none';
-                    apartmentsGrid.style.display = 'grid';
-                }, 1000);
-            }
-        });
+            document.querySelectorAll('.tab-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            document.querySelector(`[data-tab="${type}"]`).classList.add('active');
+            
+            displayBookings(type);
+        }
+
+        function showToast(message, type = 'success') {
+            const toast = document.getElementById('toast-notification');
+            const messageEl = document.getElementById('toast-message');
+            
+            messageEl.textContent = message;
+            toast.className = `toast-notification toast-${type}`;
+            toast.classList.add('show');
+            
+            setTimeout(() => {
+                toast.classList.remove('show');
+            }, 3000);
+        }
     </script>
+
+    <script>
+    (function() {
+        const currentUser = localStorage.getItem('currentUser');
+        if (!currentUser) {
+            alert('Please log in to access this page');
+            window.location.href = 'login.html';
+            return;
+        }
+        
+        const usernameElement = document.getElementById('current-username');
+        if (usernameElement) {
+            usernameElement.textContent = currentUser;
+        }
+    })();
+
+    function signOut() {
+        if (confirm('Are you sure you want to sign out?')) {
+            localStorage.removeItem('currentUser');
+            window.location.href = 'login.html';
+        }
+    }
+</script>
 </body>
 </html>

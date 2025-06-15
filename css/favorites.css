@@ -1,0 +1,193 @@
+:root {
+    --amsterdam-orange: #FF6B35;
+    --amsterdam-blue: #004D9F;
+    --amsterdam-light-blue: #E6F3FF;
+    --amsterdam-dark: #2C3E50;
+    --amsterdam-gray: #7F8C8D;
+    --amsterdam-light: #F8F9FA;
+    --amsterdam-green: #27AE60;
+    --amsterdam-red: #E74C3C;
+    --amsterdam-gold: #F1C40F;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: linear-gradient(135deg, var(--amsterdam-light-blue) 0%, #ffffff 50%, var(--amsterdam-light-blue) 100%);
+    min-height: 100vh;
+    color: var(--amsterdam-dark);
+    position: relative;
+    overflow-x: hidden;
+}
+
+body::before {
+    content: '';
+    position: fixed;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(circle at 20% 50%, rgba(255, 107, 53, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 80% 20%, rgba(0, 77, 159, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 40% 80%, rgba(39, 174, 96, 0.05) 0%, transparent 50%);
+    animation: floatBackground 20s ease-in-out infinite;
+    z-index: -1;
+}
+
+@keyframes floatBackground {
+    0%, 100% { transform: rotate(0deg) scale(1); }
+    50% { transform: rotate(180deg) scale(1.1); }
+}
+
+.navbar-custom {
+    background: linear-gradient(135deg, var(--amsterdam-blue) 0%, var(--amsterdam-orange) 100%);
+    padding: 15px 0;
+    box-shadow: 0 8px 32px rgba(0, 77, 159, 0.3);
+    backdrop-filter: blur(10px);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+
+.nav-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.brand-logo {
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    color: white !important;
+    font-weight: bold;
+    font-size: 24px;
+    transition: all 0.3s ease;
+}
+
+.brand-logo:hover {
+    transform: scale(1.05);
+    color: white !important;
+}
+
+.brand-icon {
+    font-size: 28px;
+    margin-right: 12px;
+    background: rgba(255, 255, 255, 0.2);
+    padding: 8px;
+    border-radius: 50%;
+    animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.1); }
+}
+
+.brand-text {
+    background: linear-gradient(45deg, #ffffff, #f0f8ff);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.nav-link-custom {
+    color: white !important;
+    font-weight: 500;
+    margin: 0 8px;
+    padding: 8px 16px !important;
+    border-radius: 25px;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+    text-decoration: none;
+}
+
+.nav-link-custom::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: rgba(255, 255, 255, 0.2);
+    transition: left 0.3s ease;
+}
+
+.nav-link-custom:hover {
+    color: white !important;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 15px rgba(255, 255, 255, 0.2);
+    text-decoration: none;
+}
+
+.nav-link-custom:hover::before {
+    left: 0;
+}
+
+.nav-link-custom.active {
+    background: rgba(255, 255, 255, 0.2);
+    color: white !important;
+}
+
+.user-section {
+    gap: 15px;
+}
+
+.user-info {
+    display: flex;
+    align-items: center;
+    color: white;
+    font-weight: 500;
+    gap: 8px;
+}
+
+.user-avatar {
+    font-size: 24px;
+    color: var(--amsterdam-orange);
+    filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.2));
+}
+
+.user-name {
+    font-size: 16px;
+}
+
+.btn-sign-out {
+    background: linear-gradient(45deg, var(--amsterdam-red), #c0392b);
+    border: none;
+    color: white;
+    padding: 8px 20px;
+    border-radius: 25px;
+    font-weight: 500;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.btn-sign-out::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+    transition: left 0.5s;
+}
+
+.btn-sign-out:hover {
+     background-color: #dc2626;
+    transform: translateY(-2px);
+}
+
+.btn-sign-out:hover::before {
+    left: 100%;
+}
